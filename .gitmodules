@@ -1,0 +1,3 @@
+[submodule "referral_project_client"]
+	path = referral_project_client
+	url = https://bitbucket.org/sheilafox/referral_project_client.git

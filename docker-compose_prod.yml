@@ -1,0 +1,54 @@
+version: '2'
+
+volumes:
+  postgres_data: {}
+  postgres_backup: {}
+  staticfiles: {}
+  redisdata: {}
+
+services:
+  postgres:
+    build: ./compose/postgres
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - postgres_backup:/backups
+    env_file: .env
+
+  django:
+    build:
+      context: .
+      dockerfile: ./compose/django/Dockerfile
+    user: django
+    restart: always
+    depends_on:
+      - postgres
+      - redis
+    command: /gunicorn.sh
+    volumes:
+      - staticfiles:/app/staticfiles
+    env_file: .env
+
+  nginx:
+    build: ./compose/nginx
+    restart: always
+    depends_on:
+      - django
+    volumes:
+      - staticfiles:/app/static:ro
+
+    ports:
+      - "0.0.0.0:80:80"
+
+  redis:
+    image: redis:latest
+    restart: always
+    volumes:
+      - redisdata:/data
+
+  node:
+    build:
+      context: .
+      dockerfile: ./compose/node/Dockerfile
+    volumes:
+      - staticfiles:/app/static

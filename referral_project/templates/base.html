@@ -1,0 +1,67 @@
+{% load staticfiles %}
+{% load custom_tags %}
+{% is_production as is_production %}
+{% is_local as is_local %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>referral_project</title>
+    <link rel="icon" href="http://res.cloudinary.com/sheilafox/image/upload/v1525361993/logo.png">
+
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    {% if is_production or is_local %}
+      <link rel="stylesheet" href="{% static 'styles.css' %}">
+    {% endif %}
+  </head>
+
+  <body>
+
+    <div id="app">Loading...</div>
+    <div id="alert-portal">
+        <div class="alert"></div>
+    </div>
+
+    {% if is_production or is_local %}
+      <script src="{% static 'bundle.js' %}"></script>
+    {% else %}
+      <script src="http://{% get_host request %}:8888/bundle.js"></script>
+    {% endif %}
+
+    {% include_raven %}
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!-- <script src="https://www.recaptcha.net/recaptcha/api.js" async defer></script> -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116920925-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-116920925-1');
+    </script>
+
+    <script type="text/javascript">
+      var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+      (function(){
+      var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+      s1.async=true;
+      s1.src='https://embed.tawk.to/5ac66731d7591465c7093ad2/default';
+      s1.charset='UTF-8';
+      s1.setAttribute('crossorigin','*');
+      s0.parentNode.insertBefore(s1,s0);
+      })();
+    </script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+      function onYouTubeIframeAPIReady() {
+      window.YTPlayer = YT.Player;
+      window.dispatchEvent(new CustomEvent('youtube_ready', { detail: YT.Player }));
+      }
+    </script>
+  </body>
+</html>

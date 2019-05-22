@@ -1,0 +1,32 @@
+# Pro-tip: Try not to put anything here. Avoid dependencies in
+#	production that aren't in development.
+-r base.txt
+
+
+
+# WSGI Handler
+# ------------------------------------------------
+gevent==1.2.2
+gunicorn==19.7.1
+
+# Static and Media Storage
+# ------------------------------------------------
+boto==2.48.0
+django-storages-redux==1.3.3
+Collectfast==0.5.2
+
+# Email backends for Mailgun, Postmark, SendGrid and more
+# -------------------------------------------------------
+django-anymail==0.11.1
+
+# Monitoring and Analytics
+# ------------------------
+newrelic>=2.92
+
+# Raven is the Sentry client
+# --------------------------
+raven==6.1.0
+
+# Logging
+# -------
+loggly-python-handler==1.0.0

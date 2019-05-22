@@ -1,0 +1,20 @@
+{
+  "name": "referral_project",
+  "authors": [
+    "ITBear"
+  ],
+  "description": "",
+  "main": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "get-size": "~1.2.2",
+    "angular": "~1.5.8",
+    "angular-route": "~1.5.8"
+  },
+  "resolutions": {
+  }
+}

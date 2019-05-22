@@ -1,0 +1,5 @@
+{% load staticfiles %}
+{% if sentry_public_dsn %}
+  <script src="{% static 'js/raven.min.js' %}"></script>
+  <script>Raven.config('{{ sentry_public_dsn }}').install()</script>
+{% endif %}

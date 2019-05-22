@@ -1,0 +1,48 @@
+setuptools==36.4.0
+
+# Wheel 0.25+ needed to install certain packages on CPython 3.5+
+# like Pillow and psycopg2
+# See http://bitly.com/wheel-building-fails-CPython-35
+# Verified bug on Python 3.5.1
+wheel==0.29.0
+
+# Bleeding edge Django
+django==1.11.8
+
+# Configuration
+django-environ==0.4.4
+
+
+
+# Forms
+django-braces==1.11.0
+django-crispy-forms==1.6.1
+
+# Models
+django-model-utils==3.0.0
+
+# Images
+Pillow==4.2.1
+
+# Python-PostgreSQL Database Adapter
+psycopg2==2.7.3.1
+
+# Unicode slugification
+awesome-slugify==1.6.5
+django-autoslug==1.9.3
+
+# Time zones support
+pytz==2017.2
+
+# Redis
+redis==2.10.6
+django-redis-cache==1.7.1
+
+# Django rest framework
+djangorestframework==3.7.3
+markdown==2.6.9
+django-filter==1.1.0
+
+django-cors-headers==1.2.2
+django-money==0.13.1  # https://github.com/django-money/django-money
+django-phonenumber-field==2.0.0  # https://github.com/stefanfoulis/django-phonenumber-field

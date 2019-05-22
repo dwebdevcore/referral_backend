@@ -1,0 +1,58 @@
+version: '2'
+
+volumes:
+  postgres_data_dev: {}
+  postgres_backup_dev: {}
+  redisdata: {}
+  staticfiles: {}
+
+services:
+  postgres:
+    build: ./compose/postgres
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data
+      - postgres_backup_dev:/backups
+    environment:
+      - POSTGRES_USER=referral_project
+    ports:
+#       This is to ensure no conflicts with bare-bones postgres installation happen.
+      - "5434:5432"
+
+  django:
+    build:
+      context: .
+      dockerfile: ./compose/django/Dockerfile-dev
+    command: /start-dev.sh
+    depends_on:
+      - postgres
+      - redis
+      - mailhog
+    environment:
+#      - POSTGRES_USER=referral_project
+      - USE_DOCKER=yes
+    volumes:
+      - .:/app
+      - staticfiles:/app/referral_project/static
+    ports:
+      - "8000:8000"
+    links:
+      - postgres
+
+  redis:
+    image: redis:latest
+    volumes:
+      - redisdata:/data
+
+  node:
+    build:
+      context: .
+      dockerfile: ./compose/node/Dockerfile-dev
+    volumes:
+      - ./referral_project_client:/app
+    ports:
+      - "8888:8888"
+
+  mailhog:
+    image: mailhog/mailhog:v1.0.0
+    ports:
+      - "8025:8025"
